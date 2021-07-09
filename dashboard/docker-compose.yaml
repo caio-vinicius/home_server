@@ -1,0 +1,17 @@
+version: "3.8"
+
+networks:
+  reverse_proxy:
+    external: true
+
+services:
+  homer:
+    image: b4bz/homer:latest
+    volumes:
+      - "./homer/config.yml:/www/assets/config.yml"
+      - "./homer/tools:/www/assets/tools"
+    expose:
+      - "8080"
+    restart: always
+    networks:
+      - reverse_proxy

@@ -1,0 +1,40 @@
+version: "3"
+
+networks:
+  reverse_proxy:
+    external: true
+  dns:
+    external: true
+
+services:
+  pihole:
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+    expose:
+     - "80/tcp"
+    env_file:
+      - .env
+    volumes:
+      - ./etc-pihole/:/etc/pihole
+      - ./etc-dnsmaq.d/:/etc/dnsmasq.d/
+      - ./var-log/pihole.log:/var/log/pihole.log
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    networks:
+      dns:
+        ipv4_address: 172.16.238.10
+      reverse_proxy:
+  unbound:
+    build: ./unbound
+    expose:
+      - "5335/tcp"
+      - "5335/udp"
+    dns: 172.16.238.10
+    restart: always
+    networks:
+      dns:
+        ipv4_address: 172.16.238.20
