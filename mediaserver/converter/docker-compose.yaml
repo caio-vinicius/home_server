@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+    converter:
+        image: csouzaf/conveter
+        build: .
+        restart: unless-stopped
+        volumes:
+            - "/mnt/storage/mediaserver/media/tv/The_Office_US/01:/media"
+        environment:
+            MEDIA_PATH: "/media"
+        deploy:
+            resources:
+                limits:
+                    cpus: "2"
