@@ -84,3 +84,33 @@ services:
         logo: "assets/tools/sample.png"
         url: "http://192.168.0.1/index.html"
         target: "_blank" # optional html a tag target attribute
+      - name: "Jellyfin"
+        subtitle: "Streaming media"
+        logo: "assets/tools/jellyfin.jpg"
+        url: "https://home.server/jellyfin"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Sonarr"
+        subtitle: "Series collection manager"
+        logo: "assets/tools/sonarr.png"
+        url: "https://home.server/sonarr"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Radarr"
+        subtitle: "Movie collection manager"
+        logo: "assets/tools/radarr.png"
+        url: "https://home.server/radarr"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Ombi"
+        subtitle: "Media request tool"
+        logo: "assets/tools/ombi.png"
+        url: "https://home.server/ombi"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Deluge"
+        subtitle: "Torrent Client"
+        logo: "assets/tools/deluge.png"
+        url: "https://home.server/deluge"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Jackett"
+        subtitle: "Torrent Indexer"
+        logo: "assets/tools/jackett.png"
+        url: "https://home.server/jackett"
+        target: "_blank" # optional html a tag target attribute
