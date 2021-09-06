@@ -1,0 +1,77 @@
+version: "3.7"
+
+networks:
+  reverse_proxy:
+    external: true
+
+services:
+  jellyfin:
+    image: linuxserver/jellyfin:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/jellyfin:/config"
+      - "${MEDIA_DIR}:/media"
+    expose:
+      - "8096/tcp"
+      - "7359/udp"
+    networks:
+      reverse_proxy:
+  
+  sonarr:
+    image: linuxserver/sonarr:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/sonarr:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+      - "${MEDIA_DIR}:/media"
+    expose:
+      - "8989/tcp"
+    networks:
+      reverse_proxy:
+
+  radarr:
+    image: linuxserver/radarr:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/radarr:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+      - "${MEDIA_DIR}:/media"
+    expose:
+      - "7878/tcp"
+    networks:
+      reverse_proxy:
+
+  ombi:
+    image: linuxserver/ombi:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/ombi:/config"
+    expose:
+      - "3579/tcp"
+    networks:
+      reverse_proxy:
+  
+  deluge:
+    image: linuxserver/deluge:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/deluge:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+    expose:
+      - "8112/tcp"
+      - "8118/tcp"
+      - "58846/tcp"
+      - "58946/tcp"
+    networks:
+      reverse_proxy:
+
+  jackett:
+    image: linuxserver/jackett:arm32v7-latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/jackett:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+    expose:
+      - "9117/tcp"
+    networks:
+      reverse_proxy:
